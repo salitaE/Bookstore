@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeLeaf.org">>
+<head>
+<meta charset="UTF-8" />
+<title>Books</title>
+</head>
+<body>
+	<h1>Kirjat</h1>
+	<p>(Sijoitus 1=huonoin...5=paras)</p>
+	<table call="table table-striped">
+		<tr>
+			<th>Id</th>
+			<th>Nimi</th>
+			<th>Kirjailija</th>
+			<th>Vuosi</th>
+			<th>Hinta</th>
+			<th>Sijoitus (1-5)</th>
+			<th>Toimenpiteet</th>
+			
+		<tr th:each="book : ${books}">
+			<td th:text="${book.id}"></td>
+			<td th:text="${book.title}"></td>
+			<td th:text="${book.author}"></td>
+			<td th:text="${book.publishingYear}"></td>
+			<td th:text="${book.price}"></td>
+	
+			<td><a th:href="@{/delete/{id}(id=${book.id})}">Poista</a></td>
+			<td><a th:href="@{/edit/{id}(id=${book.id})}">Muokkaa</a></td>
+		
+		</tr>
+	</table>
+	
+	<a href="/addBook">Lisää uusi kirja</a>
+		
+
+</body>
+</html>
