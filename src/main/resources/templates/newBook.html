@@ -1,22 +1,37 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeLeaf.org">
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
 <head>
 <meta charset="UTF-8">
 <title>Book</title>
 </head>
 <body>
-	<h1>Add book</h1>
+	<h1>Lisää kirja</h1>
 	<div>
 		<form th:object="${book}" th:action="@{saveBook}" action="#"
 			method="post">
-		
-			<label for="title">Title</label>
+			<div>
+			<label for="title">Nimi</label>
 			<input type="text" id="title" th:field="*{title}" />
-		
-			<label for="author">Author</label>
+			</div>
+			<div>
+			<label for="author">Kirjailija</label>
 			<input type="text" id="author" th:field="*{author}" />
+			</div>
+			<div>
+			<label for="author">Isbn</label>
+			<input type="text" id="isbn" th:field="*{isbn}" />
+			</div>
+			<div>
+			<label for="author">Julkaisuvuosi</label>
+			<input type="text" id="publishinYear" th:field="*{publishingYear}" />
+			</div>
+			<div>
+			<label for="author">Hinta</label>
+			<input type="text" id="price" th:field="*{price}" />
+			</div>
 		
-			<input type="submit" value="Save"></input>
+			<input type="submit" value="Lisää" class="btn btn-dark"></input>
 		</form>
 	</div>
 

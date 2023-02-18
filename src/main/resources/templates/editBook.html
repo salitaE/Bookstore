@@ -1,27 +1,37 @@
 <!DOCTYPE html>
 <html>
+<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Edit</title>
 </head>
 <body>
-	<h1>Edit book</h1>
+	<h1>Muokkaa tietoja</h1>
 	<div>
 		<form th:object="${book}" th:action="@{/saveBook}" action="#"
 		method="post">
 		
 		<input type ="hidden" id="id" th:field="*{id}" />
-		<label for="title">Title</label>
+		<div>
+		<label for="title">Nimi</label>
 		<input type ="text" id="title" th:field="*{title}" />
-		<label for="author">Author</label>
+		</div>
+		<div>
+		<label for="author">Kirjailija</label>
 		<input type ="text" id="author" th:field="*{author}" />
-		<label for="publishingYear">Publishing year</label>
+		</div>
+		<label for="author">Isbn</label>
+		<input type="text" id="isbn" th:field="*{isbn}" />
+		<div>
+		<label for="publishingYear">Julkaisuvuosi</label>
 		<input type ="text" id="publishingYear" th:field="*{publishingYear}" />
-		<label for="price">Price</label>
+		</div>
+		<label for="price">Hinta</label>
 		<input type ="text" id="price" th:field="*{price}" />
 		
-		
-		<input type="submit" value="Save"></input>
+		<div>
+		<input type="submit" value="Tallenna" class="btn btn-primary"></input>
+		</div>
 		</form>
 		
 		
