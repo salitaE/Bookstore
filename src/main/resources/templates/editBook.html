@@ -9,7 +9,7 @@
 	<h1>Muokkaa tietoja</h1>
 	<div>
 		<form th:object="${book}" th:action="@{/saveBook}" action="#"
-		method="post">
+		method="post"> 
 		
 		<input type ="hidden" id="id" th:field="*{id}" />
 		<div>
@@ -20,21 +20,25 @@
 		<label for="author">Kirjailija</label>
 		<input type ="text" id="author" th:field="*{author}" />
 		</div>
-		<label for="author">Isbn</label>
+		<label for="isbn">Isbn</label>
 		<input type="text" id="isbn" th:field="*{isbn}" />
 		<div>
 		<label for="publishingYear">Julkaisuvuosi</label>
 		<input type ="text" id="publishingYear" th:field="*{publishingYear}" />
 		</div>
+		<div>
 		<label for="price">Hinta</label>
 		<input type ="text" id="price" th:field="*{price}" />
-		
-		<div>
-		<input type="submit" value="Tallenna" class="btn btn-primary"></input>
 		</div>
+		<br>
+		<label for="category">Kategoria</label>
+			<select id="categories" th:field="*{category}" class="form-control">
+			<option th:each="category: ${category}" th:value="${category.categoryid}" th:text="${category.name}"></option>
+			</select>
+		
+			<input type="submit" value="Tallenna" class="btn btn-primary"></input>
+		
 		</form>
-		
-		
-
+	</div>
 </body>
 </html>

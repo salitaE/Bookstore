@@ -13,17 +13,23 @@
 			<th>Id</th>
 			<th>Nimi</th>
 			<th>Kirjailija</th>
+			<th>Isbn</th>
 			<th>Vuosi</th>
 			<th>Hinta</th>
+			<th>Kategoria</th>
 			<th>Poista</th>
-			<th>Muokkaa</th>
+			<th>Muokka</th>
+			
+			
 			
 		<tr th:each="book : ${books}">
 			<td th:text="${book.id}"></td>
 			<td th:text="${book.title}"></td>
 			<td th:text="${book.author}"></td>
+			<td th:text="${book.isbn}"></td>
 			<td th:text="${book.publishingYear}"></td>
 			<td th:text="${book.price}"></td>
+			<td th:text="${book.category != null} ? ${book.category.name} : 'null'">Category</td>
 	
 			<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Poista</a></td>
 			<td><a class="btn btn-primary" th:href="@{/edit/{id}(id=${book.id})}">Muokkaa</a></td>

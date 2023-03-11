@@ -8,28 +8,37 @@
 <body>
 	<h1>Lisää kirja</h1>
 	<div>
-		<form th:object="${book}" th:action="@{saveBook}" action="#"
+		<form th:object="${book}" th:action="@{/saveBook}" action="#"
 			method="post">
 			<div>
-			<label for="title">Nimi</label>
-			<input type="text" id="title" th:field="*{title}" />
+				<label for="title">Nimi</label>
+				<input type="text" id="title" th:field="*{title}" />
+				<div th:if="${#fields.hasErrors('title')}" th:errors="*{title}">Error</div>
 			</div>
 			<div>
 			<label for="author">Kirjailija</label>
 			<input type="text" id="author" th:field="*{author}" />
 			</div>
 			<div>
-			<label for="author">Isbn</label>
+			<label for="isbn">Isbn</label>
 			<input type="text" id="isbn" th:field="*{isbn}" />
 			</div>
 			<div>
-			<label for="author">Julkaisuvuosi</label>
-			<input type="text" id="publishinYear" th:field="*{publishingYear}" />
+			<label for="publishingYear">Julkaisuvuosi</label>
+			<input type="text" id="publishingYear" th:field="*{publishingYear}" />
 			</div>
 			<div>
-			<label for="author">Hinta</label>
+			<label for="price">Hinta</label>
 			<input type="text" id="price" th:field="*{price}" />
 			</div>
+			<br>
+			<label for="category">Kategoria</label>
+			<select id="categories" th:field="*{category}" class="form-control">
+			<option th:each="category: ${category}"
+					th:value="${category.categoryid}"
+					th:text="${category.name}"></option>
+			</select>
+			
 		
 			<input type="submit" value="Lisää" class="btn btn-dark"></input>
 		</form>
