@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
+import k23.Bookstore.domain.AppUser;
+import k23.Bookstore.domain.AppUserRepository;
 import k23.Bookstore.domain.Book;
 import k23.Bookstore.domain.BookRepository;
 import k23.Bookstore.domain.Category;
@@ -21,13 +23,16 @@ public class BookstoreApplication {
 	BookRepository bookRepository;
 	@Autowired
 	CategoryRepository categoryRepository;
+	@Autowired
+	AppUserRepository userRepository;
 	
 	public static void main(String[] args) {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
 	
 	@Bean
-	public CommandLineRunner bookstore(BookRepository bookRepository, CategoryRepository categoryRepository) {
+	public CommandLineRunner bookstore(BookRepository bookRepository, CategoryRepository categoryRepository,
+			AppUserRepository userRepository) {
 		return (args) -> {
 			
 			log.info("choose category");
@@ -44,6 +49,10 @@ public class BookstoreApplication {
 			bookRepository.save(new Book("A Farewell to Arms", "Ernest Hemingway", "36794596", 1929, 14.0, categoryRepository.findByName("Realismi").get(0)));
 			bookRepository.save(new Book("Animal Farm", "George Orwell", "5329636", 1945, 14.0, categoryRepository.findByName("Poliittinen satiiri").get(0)));	
 			
+			AppUser user1 = new AppUser("user", "$2a$10$7eA/CGFGjIimw6C1pLCFHuxE2q/.fKaopmQJ7G5Vca5kc7ZMRfSdC", "USER");
+			AppUser user2 = new AppUser("admin", "$2a$10$OOCfLriWbAJZhSFjYfSnVeiB4MVqL37I5fZlMUhwB5Uhq1/AFZRIC", "ADMIN");
+			userRepository.save(user1);
+			userRepository.save(user2);
 			log.info("fetch all books from the database");
 			for (Book book : bookRepository.findAll()) {
 				log.info("kirja: " + book.toString());

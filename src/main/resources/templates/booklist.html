@@ -6,8 +6,16 @@
 <title>Books</title>
 </head>
 <body>
-	<h1>Kirjat</h1>
-	<!--<p>(Sijoitus 1=huonoin...5=paras)</p>-->
+<div class="container">
+	<div class="col-md-4">
+		<h1>Kirjat</h1>
+	</div>
+	
+	<div class="col-md-4" style="padding:20px 0">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Kirjaudu ulos" class="btn btn-sm btn-danger"/>
+		</form>
+	</div>
 	<table class="table table-striped">
 		<tr>
 			<th>Id</th>
@@ -17,10 +25,9 @@
 			<th>Vuosi</th>
 			<th>Hinta</th>
 			<th>Kategoria</th>
-			<th>Poista</th>
-			<th>Muokka</th>
-			
-			
+			<th sec:authorize="hasAuthority('ADMIN')">Muokkaa</th>
+			<th sec:authorize="hasAuthority('ADMIN')">Poista</th>
+		</tr>
 			
 		<tr th:each="book : ${books}">
 			<td th:text="${book.id}"></td>
@@ -29,17 +36,16 @@
 			<td th:text="${book.isbn}"></td>
 			<td th:text="${book.publishingYear}"></td>
 			<td th:text="${book.price}"></td>
+			<!-- <td th:text="${book?.category?.name} ?:''"> -->
 			<td th:text="${book.category != null} ? ${book.category.name} : 'null'">Category</td>
-	
-			<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Poista</a></td>
-			<td><a class="btn btn-primary" th:href="@{/edit/{id}(id=${book.id})}">Muokkaa</a></td>
+			<td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-xs btn-primary">Muokkaa</a></td>
+			<td><a sec:authorize="hasAuthority('ADMIN')" th:href="@{/delete/{id}(id=${book.id})}" class="btn btn-xs btn-danger">Poista</a></td>
 		
 		</tr>
 	</table>
 	
+	<a sec:authorize="hasAuthority('ADMIN')" class="btn btn-dark" href="/addBook">Lisää uusi kirja </a><br>
 	
-	<a class="btn btn-dark" href="/addBook">Lisää uusi kirja </a>
-		
 
 </body>
 </html>

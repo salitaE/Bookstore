@@ -5,10 +5,15 @@
 <title>Index</title>
 </head>
 <body>
-	<div>
+	<i>"Tervehdys" <b sec:authentication="name"></b>
+	", roolisi on " <b sec:authentication="principal.authorities"></b>
+	
 		<h3>Aloitussivu</h3>
-		<a href="/booklist">Mene kirjalistaukseen</a>
-	</div>
+	</i>
+		<a href="/booklist">Mene kirjalistaukseen</a><br>
+		<a sec:authorize="hasAuthority('ADMIN')" href="category/categoryList">Mene kategorialistaukseen</a><br><br>
+	
+	<a href="/logout"><i>Kirjaudu ulos</i></a>
 
 </body>
 </html>
